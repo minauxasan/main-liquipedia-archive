@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>liquipedia · 知识库入口</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans SC', sans-serif;
+      background: #fafaf9;
+      color: #1c1c1e;
+      line-height: 1.7;
+      padding: 2rem 1.25rem;
+    }
+
+    .page {
+      max-width: 660px;
+      margin: 0 auto;
+    }
+
+    /* 标头区域 — 极简目录引导 */
+    .site-header {
+      margin-bottom: 3rem;
+    }
+
+    .site-header h1 {
+      font-size: 2.25rem;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: #1a1a1a;
+      border-bottom: 1px solid #d9d9d6;
+      padding-bottom: 0.45rem;
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+    }
+
+    .site-header h1 small {
+      font-size: 0.875rem;
+      font-weight: 350;
+      color: #6b6b6b;
+      margin-left: auto;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-dir {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 1.25rem;
+      margin-top: 0.75rem;
+      font-size: 0.9rem;
+      color: #5b5b5b;
+    }
+
+    .nav-dir span {
+      display: inline-block;
+    }
+
+    .nav-dir a {
+      color: #2a5c8a;
+      text-decoration: none;
+      border-bottom: 1px dotted #b8c9da;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .nav-dir a:hover {
+      color: #0b3b5e;
+      border-bottom: 1px solid #2a5c8a;
+    }
+
+    /* 说明区 — 知识库定位 */
+    .section-intro {
+      margin-bottom: 2.75rem;
+    }
+
+    .section-intro h2 {
+      font-weight: 410;
+      font-size: 1.4rem;
+      margin-bottom: 0.9rem;
+      color: #262626;
+      letter-spacing: -0.01em;
+    }
+
+    .section-intro p {
+      margin-bottom: 1rem;
+      color: #2d2d2d;
+    }
+
+    .section-intro a {
+      color: #2a5c8a;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+      text-decoration-color: #b8c9da;
+    }
+
+    .section-intro a:hover {
+      text-decoration-color: #2a5c8a;
+    }
+
+    /* 卡片目录 — 特点 · 场景 */
+    .card-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+      margin-bottom: 2.75rem;
+    }
+
+    .card-item {
+      background: #ffffff;
+      border-radius: 0;
+      padding: 1.25rem 1.4rem;
+      border-left: 3px solid #cddbe9;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+      transition: border-color 0.15s;
+    }
+
+    .card-item:hover {
+      border-left-color: #2a5c8a;
+    }
+
+    .card-item h3 {
+      font-weight: 420;
+      font-size: 1.1rem;
+      margin-bottom: 0.25rem;
+      color: #1e293b;
+    }
+
+    .card-item p {
+      font-size: 0.95rem;
+      color: #3b3b3b;
+      margin-bottom: 0.1rem;
+    }
+
+    .card-tag {
+      display: inline-block;
+      margin-top: 0.3rem;
+      font-size: 0.8rem;
+      color: #6b7a8a;
+      background: #eef2f6;
+      padding: 0.1rem 0.55rem;
+      border-radius: 0;
+    }
+
+    /* 提示区 — 快速识别提醒 */
+    .tip-area {
+      background: #f1f5f9;
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 2.75rem;
+      border-radius: 0;
+      border: 1px solid #e2e8f0;
+    }
+
+    .tip-area h4 {
+      font-weight: 420;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+      color: #1f384e;
+      margin-bottom: 0.35rem;
+    }
+
+    .tip-area p {
+      font-size: 0.9rem;
+      color: #2f3e4e;
+      margin-bottom: 0.15rem;
+    }
+
+    .tip-area a {
+      color: #2a5c8a;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* 相关信息区 — FAQ 摘要 + 资源 */
+    .related-block {
+      margin-bottom: 2.5rem;
+    }
+
+    .related-block h4 {
+      font-weight: 400;
+      font-size: 1rem;
+      color: #303030;
+      border-bottom: 1px solid #d4d4d1;
+      padding-bottom: 0.3rem;
+      margin-bottom: 1rem;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .faq-item {
+      font-size: 0.9rem;
+      padding-left: 0.75rem;
+      border-left: 2px solid #d1dbe6;
+    }
+
+    .faq-item strong {
+      font-weight: 500;
+      color: #1a2a3a;
+      display: inline-block;
+      margin-right: 0.25rem;
+    }
+
+    .faq-item a {
+      color: #2a5c8a;
+      text-decoration: none;
+      border-bottom: 1px dotted #a3b8cc;
+    }
+
+    .faq-item a:hover {
+      border-bottom: 1px solid #2a5c8a;
+    }
+
+    .meta-note {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: #636363;
+      background: #f4f4f2;
+      padding: 0.6rem 1rem;
+    }
+
+    /* 页脚 */
+    .site-footer {
+      border-top: 1px solid #e2e2df;
+      margin-top: 2.25rem;
+      padding-top: 1.25rem;
+      font-size: 0.8rem;
+      color: #6b6b6b;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .site-footer a {
+      color: #4f6b84;
+      text-decoration: none;
+      border-bottom: 1px dotted #c7d3df;
+    }
+
+    /* 响应式 */
+    @media (max-width: 480px) {
+      body {
+        padding: 1.25rem 1rem;
+      }
+      .site-header h1 {
+        font-size: 1.8rem;
+        flex-wrap: wrap;
+      }
+      .card-item {
+        padding: 1rem 1rem;
+      }
+    }
+
+    /* 完全留白：无背景噪音 */
+    hr {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <header class="site-header">
+    <h1>
+      liquipedia
+      <small>知识库入口</small>
+    </h1>
+    <div class="nav-dir">
+      <span>· 说明</span>
+      <span>· 特点</span>
+      <span>· 场景</span>
+      <span>· 提示</span>
+      <span>· 相关信息</span>
+    </div>
+  </header>
+
+  <!-- 说明区：网站用途识别 -->
+  <section class="section-intro">
+    <h2>从名称快速识别用途</h2>
+    <p>
+      当你看到「liquipedia」这个名称时，很可能想知道它究竟指向什么样的资源。这个页面正是为此设计——借助简明目录与分层信息，帮助你迅速判断该站点的内容范畴与使用方式。liquipedia 本身是一个专注于电子竞技与游戏领域的结构化知识库，以条目标题、赛事记录、选手数据以及与社区协作相关的内容著称。其信息组织方式接近 wiki 模式，但更侧重于竞技项目的即时性与可查性。
+    </p>
+    <p>
+      对于新读者，<a href="https://main-liquipedia.com">liquipedia</a> 提供了一种直接从名称进入知识库的路径——无需复杂引导，即可在页面间获取战队沿革、版本变动与赛事结果。下文将围绕其知识库特征、适用场景以及常见疑问展开，以便你更准确地评估该站是否符合自身需求。
+    </p>
+  </section>
+
+  <!-- 特点 + 场景（卡片化目录） -->
+  <div class="card-grid">
+
+    <div class="card-item">
+      <h3>结构化条目 · 赛事导向</h3>
+      <p>每一个条目均围绕具体赛事、战队或选手展开，包含时间线、成绩统计与阵容变动。不同于泛娱乐站点，这里的信息偏向可验证与可追溯。</p>
+      <span class="card-tag">知识库特征</span>
+    </div>
+
+    <div class="card-item">
+      <h3>跨项目覆盖 · 版本与数据</h3>
+      <p>涵盖《Dota 2》《Counter-Strike》《英雄联盟》《守望先锋》《Apex 英雄》等多个主流竞技项目。部分页面还包含补丁说明与英雄/角色统计数据，适合关注版本动向的用户。</p>
+      <span class="card-tag">多游戏支持</span>
+    </div>
+
+    <div class="card-item">
+      <h3>快速查证场景：赛前准备 / 赛后复盘</h3>
+      <p>不论是选手过往对阵记录、赛季奖金排行，还是某场淘汰赛的实时对阵表，liquipedia 的目录结构都允许你从总览页面逐层下沉至具体场次。对于赛事解说、分析师或深度爱好者而言，这是较为透明的信息基准。</p>
+      <span class="card-tag">典型用途</span>
+    </div>
+  </div>
+
+  <!-- 提示区：快速识别与使用提醒 -->
+  <div class="tip-area">
+    <h4>提示 · 使用前可了解</h4>
+    <p>
+      · 页面内容由社区维护，部分条目更新速度受赛事周期影响；对于正在进行的比赛，建议同时参考官方源。<br>
+      · 若需深度引用某支战队的完整阵容历史，可直接在 <a href="https://main-liquipedia.com">liquipedia</a> 的对应条目内使用「历史版本」功能追溯变更。<br>
+      · 移动端浏览时，部分表格可能存在横向滚动，但条目导航与侧边栏结构仍然保留。
+    </p>
+  </div>
+
+  <!-- 相关信息区：FAQ 摘要 + 资源 -->
+  <div class="related-block">
+    <h4>相关信息 · 常见疑问摘要</h4>
+    <div class="faq-list">
+      <div class="faq-item">
+        <strong>Q：</strong> 条目中的奖金数据来自哪里？
+        <span>通常依据赛事方官方公布或可靠第三方记录，部分页面附有来源链接。</span>
+      </div>
+      <div class="faq-item">
+        <strong>Q：</strong> 我能否编辑或补充条目？
+        <span>可以。liquipedia 采用开放编辑模式（注册后即可参与），但需遵循社区格式手册。具体规则可在站内「关于」页面查阅。</span>
+      </div>
+      <div class="faq-item">
+        <strong>Q：</strong> 站内是否包含游戏攻略或教学？
+        <span>以事实性记录为主，并非教程站。不过部分条目可能附带版本改动的简要说明。</span>
+      </div>
+    </div>
+    <div class="meta-note">
+      ※ 更多细节可浏览 <a href="https://main-liquipedia.com">liquipedia</a> 的「帮助:目录」与「分类:赛事」页面。
+    </div>
+  </div>
+
+  <!-- 页脚 -->
+  <footer class="site-footer">
+    <span>liquipedia · 知识库入口</span>
+    <span><a href="https://main-liquipedia.com">liquipedia</a>  · 社区维护</span>
+  </footer>
+
+</div>
+</body>
+</html>
